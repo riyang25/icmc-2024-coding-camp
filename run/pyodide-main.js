@@ -22,7 +22,11 @@ function promiseHandles() {
 let { resolve: resolveInitialized, promise: initialized } = promiseHandles();
 
 async function initializePyodide() {
-  const worker = new Worker("pyodide-worker.js");
+  const workerResponse = await fetch("pyodide-worker.js");
+  const workerContent = await workerResponse.text();
+  const workerBlob = new Blob([workerContent], { type: "application/javascript" });
+  const workerBlobURL = URL.createObjectURL(workerBlob);
+  const worker = new Worker(workerBlobURL);
   const wrapper = Synclink.wrap(worker);
   const result = await wrapper(Synclink.proxy(window));
   ({ pyodide, InnerExecution, BANNER, complete } = result);
