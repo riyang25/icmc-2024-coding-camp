@@ -14,7 +14,10 @@ async function fetch_and_install(url) {
   pyodide.FS.write(stream, buffer, 0, buffer.byteLength, 0, true);
   pyodide.FS.close(stream);
 }
-const pycode_promise = fetch_and_install("console_main.py");
+
+// This string is crudely replaced in `pyodide-main.js` with the page URL.
+const pycode_promise_baseURL = "PYODIDE_PROMISE_BASE_URL";
+const pycode_promise = fetch_and_install(pycode_promise_baseURL + "/console_main.py");
 
 function sleep(t) {
   return new Promise((resolve) => setTimeout(resolve, t));

@@ -23,7 +23,8 @@ let { resolve: resolveInitialized, promise: initialized } = promiseHandles();
 
 async function initializePyodide() {
   const workerResponse = await fetch("pyodide-worker.js");
-  const workerContent = await workerResponse.text();
+  let workerContent = await workerResponse.text();
+  workerContent = workerContent.replace("PYODIDE_PROMISE_BASE_URL", window.location.href);
   const workerBlob = new Blob([workerContent], { type: "application/javascript" });
   const workerBlobURL = URL.createObjectURL(workerBlob);
   const worker = new Worker(workerBlobURL);
