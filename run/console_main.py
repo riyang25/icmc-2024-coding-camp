@@ -1,5 +1,6 @@
 from pyodide.console import BANNER, PyodideConsole, repr_shorten
-from pyodide import to_js
+from pyodide.code import CodeRunner
+from pyodide.ffi import to_js
 import __main__
 import time
 
@@ -18,6 +19,18 @@ async def exec_code(
     pyconsole.stdin_callback = stdin_callback
     pyconsole.stdout_callback = stdout_callback
     pyconsole.stderr_callback = stderr_callback
+    code_runner = CodeRunner("""
+try:
+    import random
+    a = int(input("stuff: "))
+    for i in range(a):
+        print(i)
+    print(a, random.randint(1, 6))
+except:
+    print("An error occurred. Program ended.")
+""")
+    code_runner.compile()
+    await pyconsole.runcode("", code_runner)
     for line in code.splitlines():
         fut = pyconsole.push(line)
         if fut.syntax_check == "syntax-error":
