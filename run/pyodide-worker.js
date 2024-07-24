@@ -1,5 +1,5 @@
 importScripts("https://cdn.jsdelivr.net/npm/synclink@0.2.4/dist/iife/synclink.min.js");
-let indexURL = "https://cdn.jsdelivr.net/pyodide/v0.19.1/full/";
+let indexURL = "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/";
 importScripts(indexURL + "pyodide.js");
 let pyodideLoaded = loadPyodide({ indexURL });
 
