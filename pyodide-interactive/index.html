@@ -65,7 +65,7 @@
     </style>
     <script>
       if ("serviceWorker" in navigator && !window.crossOriginIsolated) {
-        navigator.serviceWorker.register(new URL("./sw.js", location.href)).then(
+        navigator.serviceWorker.register(new URL("../sw.js", location.href)).then(
           registration => {
             if (registration.active && !navigator.serviceWorker.controller) {
               window.location.reload();

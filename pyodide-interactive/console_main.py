@@ -4,6 +4,7 @@ from pyodide.ffi import to_js
 import __main__
 import time
 
+BANNER += "\nYou may need to refresh this page once to fully initialize the emulator."
 __all__ = ["BANNER", "pycomplete", "exec_code"]
 
 pyconsole = PyodideConsole(globals=__main__.__dict__, filename="<console>")
@@ -19,18 +20,21 @@ async def exec_code(
     pyconsole.stdin_callback = stdin_callback
     pyconsole.stdout_callback = stdout_callback
     pyconsole.stderr_callback = stderr_callback
-    code_runner = CodeRunner("""
-try:
-    import random
-    a = int(input("stuff: "))
-    for i in range(a):
-        print(i)
-    print(a, random.randint(1, 6))
-except:
-    print("An error occurred. Program ended.")
-""")
-    code_runner.compile()
-    await pyconsole.runcode("", code_runner)
+
+    # This can be used to execute a multiline block of code immediately.
+#     code_runner = CodeRunner("""
+# try:
+#     import random
+#     a = int(input("stuff: "))
+#     for i in range(a):
+#         print(i)
+#     print(a, random.randint(1, 6))
+# except:
+#     print("An error occurred. Program ended.")
+# """)
+#     code_runner.compile()
+#     await pyconsole.runcode("", code_runner)
+
     for line in code.splitlines():
         fut = pyconsole.push(line)
         if fut.syntax_check == "syntax-error":
