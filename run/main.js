@@ -1,5 +1,5 @@
 const query = new URLSearchParams(window.location.search);
-const progIDs = new Set(["0", "1", "2", "3", "4", "5"]);
+const progIDs = new Set(["0", "1", "2", "3", "4"]);
 
 (async function () {
     let progID = query.get("progid");
@@ -34,9 +34,8 @@ const progIDs = new Set(["0", "1", "2", "3", "4", "5"]);
     // prog = prog.replace(/input\(\)/g, "input(\"> \")");
     // console.log(prog);
 
-    // cowsay module required for one group.
     document.body.innerHTML += `
-<script id="python-script" type="py" config='{"packages":["cowsay"]}' terminal worker>
+<script id="python-script" type="py" config="./config/${progID}.toml" terminal worker>
 # Work around weird bug in Pyscript.
 # Previously printed lines are duplicated by an input 
 # with an empty string or contains newlines.
