@@ -14,14 +14,14 @@ jobs:
       matrix:
         include:
           - name: GNU/Linux
-            os: debian-latest
-            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+            os: ubuntu-latest
+            pyinstaller_cmd: pyinstaller --onefile --name CODES-linux-x64 main.py
           - name: macOS
             os: macos-latest
-            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+            pyinstaller_cmd: pyinstaller --onefile --name CODES-windows-x64 main.py
           - name: Windows
             os: windows-latest
-            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+            pyinstaller_cmd: pyinstaller --onefile --name CODES-macos-x64 main.py
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -32,3 +32,10 @@ jobs:
         run: |
           cd student_project
           ${{ matrix.pyinstaller_cmd }}
+      - name: Commit Build
+        run: |
+          git config user.name "Bot"
+          cd student_projects
+          git add dist
+          git commit -m "Build."
+          git push
