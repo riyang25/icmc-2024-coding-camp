@@ -17,10 +17,10 @@ jobs:
             pyinstaller_cmd: pyinstaller --onefile --name CODES-linux-x64 main.py
           - name: macOS
             os: macos-latest
-            pyinstaller_cmd: pyinstaller --onefile --name CODES-windows-x64 main.py
+            pyinstaller_cmd: pyinstaller --onefile --name CODES-macos-x64 main.py
           - name: Windows
             os: windows-latest
-            pyinstaller_cmd: pyinstaller --onefile --name CODES-macos-x64 main.py
+            pyinstaller_cmd: pyinstaller --onefile --name CODES-windows-x64 main.py
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -36,7 +36,7 @@ jobs:
       - name: Upload Builds
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ matrix.name }} Upload
+          name: Upload
           draft: true
           files: |
             student_project/dist/*
