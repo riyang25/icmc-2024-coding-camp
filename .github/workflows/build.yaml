@@ -1,0 +1,34 @@
+name: Pyinstaller Build
+
+on:
+  push:
+    branches:
+      - main
+      - special
+
+jobs:
+  build:
+    name: "Build"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: GNU/Linux
+            os: debian-latest
+            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+          - name: macOS
+            os: macos-latest
+            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+          - name: Windows
+            os: windows-latest
+            pyinstaller_cmd: pyinstaller --onefile --name CODES main.py
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - name: Install Pyinstaller
+        run: pip install pyinstaller
+      - name: Build Executable
+        run: |
+          cd student_project
+          ${{ matrix.pyinstaller_cmd }}
