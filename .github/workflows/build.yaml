@@ -36,7 +36,7 @@ jobs:
       - name: Upload Builds
         uses: softprops/action-gh-release@v2
         with:
-          name: Upload
+          name: ${{ matrix.name }} Upload
           draft: true
           files: |
-            dist/*
+            student_project/dist/*
