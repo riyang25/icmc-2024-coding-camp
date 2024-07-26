@@ -14,3 +14,8 @@ Some projects may be incomplete.
     - [macOS x64 (no Apple Silicon)](https://github.com/riyang25/icmc-2024-coding-camp/releases/download/upload-2/CODES-macos-x64)
     - [Linux x64](https://github.com/riyang25/icmc-2024-coding-camp/releases/download/upload-2/CODES-linux-x64)
         - Run via command line.
+
+___
+
+[Pyscript Interactive Console](https://riyang25.github.io/icmc-2024-coding-camp/pyscript-interactive/)  
+[Pyodide Interactive Console](https://riyang25.github.io/icmc-2024-coding-camp/pyodide-interactive/)
