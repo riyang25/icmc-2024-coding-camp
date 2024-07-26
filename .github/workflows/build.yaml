@@ -35,7 +35,7 @@ jobs:
       - name: Commit Build
         run: |
           git config user.name "Bot"
-          cd student_projects
+          cd student_project
           git add dist
           git commit -m "Build."
           git push
